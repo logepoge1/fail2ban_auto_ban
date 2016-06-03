@@ -1,0 +1,37 @@
+Please edit the following files where specified:
+
+banQuery.py, banRefresh.py, insert.py
+	edit the database config information
+	edit the to and from email addresses(where applicable)
+
+database.conf
+	set actionban = <path to insert.py>
+
+jail.local
+	this is just an example file of the jail.local that shows
+	how to implement the actions in your existing jail.local file
+
+sendmail-common.conf
+	set the sender flag or use your existing file with same name
+
+sendmail-logan.conf
+	set the dest flag
+
+start-stop-email.conf
+	no changes necessary
+
+HOW TO IMPLEMENT:
+
+create the database user and run the create table script against the database
+(initial.sql)
+
+place the *.conf files in your /etc/fail2ban/actions.d/ directory
+
+update your jail.local
+
+run banQuery on a once daily cronjob
+(not: this must be on sudo crontab -e)
+(00 9 * * * python /scripts/fail2ban/banQuery.py)
+
+This should do it. Instructions will be updated once I have a chance to 
+implement these as test
